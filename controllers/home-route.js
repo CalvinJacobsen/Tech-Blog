@@ -1,9 +1,8 @@
 const router = require('express').Router();
-const path = require('path');
-const { User } = require('../../Project2 - ParkFinder/models');
+const { User } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const userData = await User.findAll({
             attributes: { exclude: ['password'] },
@@ -21,12 +20,32 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+    // if a session exists, redirect the request to homepage
     if (req.session.logged_in) {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
+
+router.get('/signup', (req, res) => {
+    // if a session exists, redirect the request to homepage
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
+});
+
+router.get('/dashboard', withAuth, (req, res) => {
+    if (req.session.logged_in) {
+        res.render('dashboard')
+        res.status(204).end
+    } else {
+        res.render('login')
+        res.status(204).end
+    }
+
+})
 
 module.exports = router;
