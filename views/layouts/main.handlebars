@@ -8,18 +8,27 @@
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
-      <div class="title"><h2>Tech Deck Blogs</h2></div>
+      <div class="title">
+        <h2>Tech Deck Blogs</h2>
+      </div>
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Logout</a></li>
+        <li><a href="" id="homepage">Home</a></li>
+        <li><a href="" id="dashboard">Dashboard</a></li>
+        {{#if logged_in}}
+        <li><a href="" id="logout">Logout</a></li>
+        {{else}}
+        <li><a href="" id="login">Login</a></li>
+        {{/if}}
       </ul>
-      
+
     </header>
     <main class="container container-fluid mt-5">
       {{{ body }}}
     </main>
   </div>
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
 
 </html>
