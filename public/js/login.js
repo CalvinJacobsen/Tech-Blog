@@ -20,8 +20,8 @@ const loginFormHandler = async (event) => {
 };
 
 const signup = async () => {
-  const response = await fetch('/api/users/signup', {
-    method: 'POST',
+  const response = await fetch('/signup', {
+    method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
 

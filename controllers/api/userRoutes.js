@@ -1,12 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-//home
-router.post('/', async (req, res) => {
-  res.render('homepage');
-  res.status(204).end;
-});
-
 //login
 router.post('/login', async (req, res) => {
   try {
@@ -51,21 +45,21 @@ router.post('/logout', (req, res) => {
   }
 });
 
-//dashboard
-router.post('/dashboard', (req, res) => {
-  if (req.session.logged_in) {
-    res.render('dashboard')
-    res.status(204).end
-  } else {
-    res.render('login')
-    res.status(204).end
-  }
-});
-
 //signup
-router.post('/signup', (req, res) => {
-  res.render('signup')
-  res.status(204).end
+router.post('/signup', async (req, res) => {
+  try {
+    const userData = await User.create(req.body);
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+    res.status(200).json(userData);
+    });
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
