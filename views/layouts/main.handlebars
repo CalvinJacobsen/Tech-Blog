@@ -3,6 +3,7 @@
   <title>Tech-Blog</title>
   <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 
 <body>
@@ -12,14 +13,12 @@
         <h2>Tech Deck Blogs</h2>
       </div>
       <ul>
-        <li><a href="" id="homepage">Home</a></li>
-        <li><a href="" id="dashboard">Dashboard</a></li>
-        {{#if logged_in}}
-        {{log "logged_in"}}
-        <li><a href="" id="logout">Logout</a></li>
+        <li><a href="/homepage" >Home</a></li>
+        <li><a href="/dashboard" id="dashboard">Dashboard</a></li>
+        {{#if session.logged_in}}
+        <li><a href="#" id="logout">Logout</a></li>
         {{else}}
-        {{log "Not logged in"}}
-        <li><a href="" id="login">Login</a></li>
+        <li><a href="/login" id="login">Login</a></li>
         {{/if}}
       </ul>
 
@@ -28,10 +27,10 @@
       {{{ body }}}
     </main>
   </div>
-  {{#if logged_in}}
+  {{#if session.logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-  <script src="/js/index.js"></script>
+
 </body>
 
 </html>

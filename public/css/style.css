@@ -74,8 +74,13 @@ header {
   left: 45%;
   padding: 20px 30px;
   border-radius: 10px;
-  background-color: #389393;
-  border: #f5a25d 3px solid;
+  background-color: #f5a25d;
+  border: #389393 3px solid;
   color: white;
   font-size: 20px;
+  cursor: pointer;
+}
+
+.new-post-btn:hover {
+  background-color:#e2995d;
 }

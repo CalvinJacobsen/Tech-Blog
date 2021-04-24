@@ -5,6 +5,7 @@ const logout = async () => {
   });
 
   if (response.ok) {
+    logged_in = false;
     document.location.replace('/login');
   } else {
     alert(response.statusText);

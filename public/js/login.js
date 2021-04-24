@@ -12,29 +12,14 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      logged_in = true;
+      document.location.replace('/homepage');
+
     } else {
-      alert('Failed to log in');
+      alert(response.statusText);
     }
   }
 };
-
-const signup = async () => {
-  const response = await fetch('/signup', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-
-  if (response.ok) {
-    document.location.replace('/signup');
-  } else {
-    alert(response.statusText);
-  }
-};
-
-document
-  .querySelector('#signup-form-btn')
-  .addEventListener('click', signup);
 
 document
   .querySelector('.login-form')

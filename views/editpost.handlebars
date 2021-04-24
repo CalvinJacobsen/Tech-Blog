@@ -1,0 +1,24 @@
+<form class="form editpost-form">
+    <div id="post" style="display: block; border:3px solid black; margin-bottom:20px;">
+        <div id="post-header-box" class="form-group"
+            style="display:block; background-color: #f5a25d; color: white; padding: 7px 15px">
+            <!-- Post Title -->
+            <input id="new-post-title" type="text" value="{{post.title}}"
+                style="height: 40px;width: 80%; border-radius:10px; padding: 2px 0px 0px 15px ">
+        </div>
+        <div id="post-content-box" class="form-group" style="display:block; padding: 15px;">
+            <!-- Content typing area -->
+            <textarea id="new-post-content" name="post-content" rows="8" cols="50" type="text"
+                style="font-size: 20px;border-radius:8px; line-height: 1.4; width:100%; padding: 10px; resize: vertical">{{post.content}}</textarea>
+            <!-- End Content typing area -->
+        </div>
+    </div>
+    <!-- Submit post button -->
+    <div class="form-group">
+        <button class="btn submit-edits-btn" id="submit-post-btn" type="submit"
+            style="position:absolute;padding: 10px 15px;border-radius: 5px;background-color: #f5a25d;border: #389393 2px solid;color: black;font-size: 16px;cursor: pointer;">Confirm
+            Edits</button>
+    </div>
+</form>
+
+<script src="/js/editpost.js"></script>

@@ -6,9 +6,10 @@ const newPost = async () => {
     if (response.ok) {
         document.location.replace('/dashboard/newpost');
     } else {
-        
+
         alert(response);
     }
 }
+
 
 document.querySelector('#new-post-btn').addEventListener('click', newPost)
