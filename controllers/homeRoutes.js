@@ -39,7 +39,7 @@ router.get('/dashboard', async (req, res) => {
                 include: User
             });
             const posts = userPostData.map((post) => post.get({ plain: true }));
-            console.log(posts)
+            //console.log(posts)
 
             res.render('dashboard', {
                 posts,
@@ -73,6 +73,7 @@ router.get('/dashboard/post/:id', async (req, res) => {
         const post = postData.get({ plain: true });
         // console.log(post)
         res.render('editpost', {
+            postId: req.params.id,
             post,
             logged_in: req.session.logged_in
         });

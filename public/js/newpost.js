@@ -3,13 +3,13 @@ const newPostHandler = async (event) => {
     event.preventDefault();
     console.log('newposthandler triggered')
     
-    const newTitle = document.querySelector('#post-title').value.trim();
-    const newContents = document.querySelector('#post-content').value.trim();
+    const title = document.querySelector('#post-title').value.trim();
+    const contents = document.querySelector('#post-content').value.trim();
 
-    if (newTitle && newContents) {
-        const response = await fetch(`/api/posts/createpost`, {
+    if (title && contents) {
+        const response = await fetch(`/api/posts/newpost`, {
             method: 'POST',
-            body: JSON.stringify({ newTitle, newContents }),
+            body: JSON.stringify({ title, contents }),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -22,5 +22,7 @@ const newPostHandler = async (event) => {
         }
     }
 };
+
+
 
 document.querySelector('.newpost-form').addEventListener('submit', newPostHandler)

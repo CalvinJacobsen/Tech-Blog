@@ -1,15 +1,18 @@
+
+
 const editPostHandler = async (event) => {
     
     event.preventDefault();
     console.log('editposthandler triggered')
     
-    const title = document.querySelector('#new-post-title').value.trim();
-    const contents = document.querySelector('#new-post-content').value.trim();
+    const title = document.querySelector('#editted-post-title').value.trim();
+    const content = document.querySelector('#editted-post-content').value.trim();
+    const postId = $(".editpost-form").attr('id');
     
-    if (title && contents) {
-        const response = await fetch(`/api/posts/editpost`, {
-            method: 'POST',
-            body: JSON.stringify({ title, contents }),
+    if (title && content) {
+        const response = await fetch(`/api/posts/editpost/${postId}`, {
+            method: 'PUT',
+            body: JSON.stringify({ title, content }),
             headers: {
                 'Content-Type': 'application/json',
             },

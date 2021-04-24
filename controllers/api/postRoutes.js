@@ -1,12 +1,13 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { User, Post } = require('../../models');
 const withAuth = require('../../utils/auth');
+
 
 var currentDateAndTime = require('moment')().format('MMM Do YYYY, hh:mm A');
 
-router.post('/createpost', async (req, res) => {
-    
-    console.log(currentDateAndTime)
+router.post('/newpost', async (req, res) => {
+
+    //console.log(currentDateAndTime)
     try {
         const newPost = await Post.create({
             title: req.body.title,
@@ -23,21 +24,20 @@ router.post('/createpost', async (req, res) => {
     }
 });
 
-router.post('/editpost', async (req, res) => {
-    console.log(req.params.id)
-    try {
-        const postData = await Post.findByPk(req.params.id, {
-            include: User
-        });
-        const post = postData.get({ plain: true });
-        console.log(post)
+router.put('/editpost/:id', async (req, res) => {
 
-        const updatedPost = await Post.update({
-            title: req.body.newTitle,
-            content: req.body.newContents,
+    try {
+        await Post.findByPk(req.params.id).then((post) => {
+            //updating the contents to new title/contents
+            post.update({
+                title: req.body.title,
+                content: req.body.content
+            }).then((post) => {
+
+
+                res.json(post);
+            });
         });
-        console.log(updatedPost)
-        res.status(200).json(updatedPost);
 
     } catch (err) {
         res.status(400).json(err);
