@@ -1,10 +1,11 @@
+{{#each allPosts as |post|}}
 <div id="post" style="display: block; border:3px solid black; margin-bottom:20px;">
     <div id="post-header" style="display:block; background-color: #389393; color: white; padding: 7px 15px">
-        <h2 style="display:inline">Post Title Here</h2>
-        <h6 style="display:inline; float:right; margin-top: 10px">Posted by (Name) on XX/XX/XXXX</h6>
+        <h2 style="display:inline">{{post.title}}</h2>
+        <h6 style="display:inline; float:right; margin-top: 10px">Posted by {{post.author}} on {{post.post_date}}</h6>
     </div>
     <div id="post-content" style="padding: 15px; font-size: 20px; line-height: 1.4">
-        Post Text Here: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua...
+        {{post.content}}
     </div>
 </div>
+{{/each}}

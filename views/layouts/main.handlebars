@@ -13,8 +13,11 @@
       <div class="title">
         <h2>Tech Deck Blogs</h2>
       </div>
+      {{#if session.logged_in}}
+      <h3>Hello, {{session.user_name}}!</h3>
+      {{/if}}
       <ul>
-        <li><a href="/homepage" >Home</a></li>
+        <li><a href="/homepage">Home</a></li>
         <li><a href="/dashboard" id="dashboard">My Dashboard +</a></li>
         {{#if session.logged_in}}
         <li><a href="#" id="logout">Logout</a></li>

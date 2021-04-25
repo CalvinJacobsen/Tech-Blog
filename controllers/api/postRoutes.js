@@ -44,4 +44,17 @@ router.put('/editpost/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id/delete', async (req, res, next) => {
+
+    try {
+        
+        const postData = await Post.findByPk(req.params.id);
+        console.log('post Destroyed')
+        postData.destroy();
+        res.status(200).json(postData);
+    } catch (err) {
+        res.status(500).json(err);
+    };
+});
+
 module.exports = router;

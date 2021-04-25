@@ -4,13 +4,15 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-        const userData = await User.findAll({
-            attributes: { exclude: ['password'] },
-            order: [['name', 'ASC']]
-        })
-        const users = userData.map((project) => project.get({ plain: true }));
-        // console.log(userData.dataValues.name);
-        res.render('homepage');
+    
+        const allPostData = await Post.findAll()
+        const allPosts = allPostData.map((post) => post.get({ plain: true }));
+
+        res.render('homepage', {
+            allPosts,
+            session: req.session
+        });
+
     } catch (err) {
         res.status(500).json(err);
     }
@@ -24,10 +26,19 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.get('/homepage', (req, res) => {
-    res.render('homepage', {
-        session: req.session
-    });
+router.get('/homepage', async (req, res) => {
+    try {
+        
+        const allPostData = await Post.findAll()
+        const allPosts = allPostData.map((post) => post.get({ plain: true }));
+
+        res.render('homepage', {
+            allPosts,
+            session: req.session
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 router.get('/dashboard', async (req, res) => {
