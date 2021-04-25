@@ -47,7 +47,9 @@ router.get('/dashboard', async (req, res) => {
     if (req.session.logged_in) {
         try {
             const userPostData = await Post.findAll({
-                include: User
+                where: {
+                    user_id: req.session.user_id
+                }
             });
             const posts = userPostData.map((post) => post.get({ plain: true }));
             //console.log(posts)
