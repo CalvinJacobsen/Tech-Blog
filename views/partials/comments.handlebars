@@ -1,0 +1,9 @@
+{{#each allComments as |comment|}}
+<div id="post-header" style="display:block; background-color: #389393; color: white; padding: 7px 15px">
+    <h6 style="display:inline; float:right; margin-top: 10px">Posted by {{comment.author}} on {{comment.comment_date}}
+    </h6>
+</div>
+<div id="comment-content" style="padding: 15px; font-size: 20px; line-height: 1.4">
+    {{comment.comment_content}}
+</div>
+{{/each}}

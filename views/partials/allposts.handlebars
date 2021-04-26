@@ -1,5 +1,5 @@
 {{#each allPosts as |post|}}
-<div id="post" style="display: block; border:3px solid black; margin-bottom:20px;">
+<a id="post" href="/homepage/post/{{post.id}}" style="display: block; border:3px solid black; margin-bottom:20px;">
     <div id="post-header" style="display:block; background-color: #389393; color: white; padding: 7px 15px">
         <h2 style="display:inline">{{post.title}}</h2>
         <h6 style="display:inline; float:right; margin-top: 10px">Posted by {{post.author}} on {{post.post_date}}</h6>
@@ -7,5 +7,5 @@
     <div id="post-content" style="padding: 15px; font-size: 20px; line-height: 1.4">
         {{post.content}}
     </div>
-</div>
+</a>
 {{/each}}

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -7,7 +7,6 @@ var currentDateAndTime = require('moment')().format('MMM Do YYYY, hh:mm A');
 
 router.post('/newpost', async (req, res) => {
 
-    //console.log(currentDateAndTime)
     try {
         const newPost = await Post.create({
             title: req.body.title,
@@ -18,6 +17,25 @@ router.post('/newpost', async (req, res) => {
         });
         console.log(newPost)
         res.status(200).json(newPost);
+
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.post('/:id/newcomment', async (req, res) => {
+
+    try {
+        const newComment = await Comment.create({
+            comment_date: currentDateAndTime,
+            comment_content: req.body.commentContents,
+            author: req.session.user_name,
+            user_id: req.session.user_id,
+            post_id: req.params.id
+        });
+
+        console.log(newComment)
+        res.status(200).json(newComment);
 
     } catch (err) {
         res.status(400).json(err);
@@ -47,7 +65,6 @@ router.put('/editpost/:id', async (req, res) => {
 router.delete('/:id/delete', async (req, res, next) => {
 
     try {
-        
         const postData = await Post.findByPk(req.params.id);
         console.log('post Destroyed')
         postData.destroy();

@@ -1,6 +1,8 @@
-DROP DATABASE IF EXISTS post_db;
 DROP DATABASE IF EXISTS user_db;
-CREATE DATABASE post_db;
 CREATE DATABASE user_db;
+
+
+
+
 
 

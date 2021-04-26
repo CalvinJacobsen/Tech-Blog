@@ -5,7 +5,7 @@ const newPostHandler = async (event) => {
     
     const title = document.querySelector('#post-title').value.trim();
     const contents = document.querySelector('#post-content').value.trim();
-
+    
     if (title && contents) {
         const response = await fetch(`/api/posts/newpost`, {
             method: 'POST',
@@ -22,7 +22,5 @@ const newPostHandler = async (event) => {
         }
     }
 };
-
-
 
 document.querySelector('.newpost-form').addEventListener('submit', newPostHandler)
