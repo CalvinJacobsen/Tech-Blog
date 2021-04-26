@@ -1,9 +1,10 @@
 {{#each allComments as |comment|}}
-<div id="post-header" style="display:block; background-color: #389393; color: white; padding: 7px 15px">
-    <h6 style="display:inline; float:right; margin-top: 10px">Posted by {{comment.author}} on {{comment.comment_date}}
+<div id="comment{{comment.id}}" style=" display:block; background-color: #389393; color: rgb(0, 0, 0); padding: 1px 15px; margin-bottom:20px">
+    <h3 style="position:absolute; display:inline; font-size:22px; margin-top: 10px;"><u>{{comment.author}}</u></h3>
+    <h6 style="display:inline; font-size:12px; float:right; margin-top: 10px">- {{comment.comment_date}}
     </h6>
 </div>
-<div id="comment-content" style="padding: 15px; font-size: 20px; line-height: 1.4">
+<div id="comment-content" style="padding: 15px; font-size: 20px; line-height: 1.4; padding: 25px">
     {{comment.comment_content}}
 </div>
 {{/each}}

@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-    
+
         const allPostData = await Post.findAll()
         const allPosts = allPostData.map((post) => post.get({ plain: true }));
 
@@ -28,7 +28,7 @@ router.get('/signup', (req, res) => {
 
 router.get('/homepage', async (req, res) => {
     try {
-        
+
         const allPostData = await Post.findAll()
         const allPosts = allPostData.map((post) => post.get({ plain: true }));
 
@@ -42,31 +42,38 @@ router.get('/homepage', async (req, res) => {
 });
 
 router.get('/homepage/post/:id', async (req, res) => {
-    try {
-        //finding the individual post title and contents
-        const postData = await Post.findByPk(req.params.id, {
-            include: User
-        });
-        // finding the comments associated with that post
-        const commentData = await Comment.findAll({ 
-            where: {
-                post_id: req.params.id,
-            }
-        });
 
-        const allComments = commentData.map((comment) => comment.get({ plain: true }));
-        console.log(allComments);
-        const post = postData.get({ plain: true });
+    if (req.session.logged_in) {
 
-        res.render('commentsection', {
-            postId: req.params.id,
-            allComments,
-            post,
-            logged_in: req.session.logged_in
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    };
+        try {
+            //finding the individual post title and contents
+            const postData = await Post.findByPk(req.params.id, {
+                include: User
+            });
+            // finding the comments associated with that post
+            const commentData = await Comment.findAll({
+                where: {
+                    post_id: req.params.id,
+                }
+            });
+
+            const allComments = commentData.map((comment) => comment.get({ plain: true }));
+            console.log(allComments);
+            const post = postData.get({ plain: true });
+
+            res.render('commentsection', {
+                postId: req.params.id,
+                allComments,
+                post,
+                session: req.session
+            });
+        } catch (err) {
+            res.status(500).json(err);
+        };
+
+    } else {
+        res.render('login')
+    }
 });
 
 router.get('/dashboard', async (req, res) => {
@@ -116,7 +123,7 @@ router.get('/dashboard/post/:id', async (req, res) => {
         res.render('editpost', {
             postId: req.params.id,
             post,
-            logged_in: req.session.logged_in
+            session: req.session
         });
     } catch (err) {
         res.status(500).json(err);
