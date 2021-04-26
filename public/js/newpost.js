@@ -1,7 +1,7 @@
 const newPostHandler = async (event) => {
     
     event.preventDefault();
-    console.log('newposthandler triggered')
+    //console.log('newposthandler triggered')
     
     const title = document.querySelector('#post-title').value.trim();
     const contents = document.querySelector('#post-content').value.trim();

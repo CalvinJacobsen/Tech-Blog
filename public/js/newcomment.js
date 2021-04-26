@@ -1,12 +1,12 @@
 const newCommentHandler = async (event) => {
     
     event.preventDefault();
-    console.log('newCommentHandler triggered!')
+    //console.log('newCommentHandler triggered!')
     
     const commentContents = document.querySelector('#comment-post-content').value.trim();
     const postId = $(".post-and-comment-form").attr('id');
     
-    console.log(postId);
+    //console.log(postId);
     if (commentContents) {
         const response = await fetch(`/api/posts/${postId}/newcomment`, {
             method: 'POST',

@@ -15,7 +15,7 @@ router.post('/newpost', async (req, res) => {
             content: req.body.contents,
             user_id: req.session.user_id
         });
-        console.log(newPost)
+        //console.log(newPost)
         res.status(200).json(newPost);
 
     } catch (err) {
@@ -34,7 +34,7 @@ router.post('/:id/newcomment', async (req, res) => {
             post_id: req.params.id
         });
 
-        console.log(newComment)
+        //console.log(newComment)
         res.status(200).json(newComment);
 
     } catch (err) {
@@ -66,8 +66,14 @@ router.delete('/:id/delete', async (req, res, next) => {
 
     try {
         const postData = await Post.findByPk(req.params.id);
-        console.log('post Destroyed')
+        
+
+        Comment.destroy({where: {
+            post_id: req.params.id
+        }});
+
         postData.destroy();
+
         res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);

@@ -1,7 +1,7 @@
 const editPostHandler = async (event) => {
 
     event.preventDefault();
-    console.log('editposthandler triggered')
+    //console.log('editposthandler triggered')
 
     const title = document.querySelector('#editted-post-title').value.trim();
     const content = document.querySelector('#editted-post-content').value.trim();
@@ -28,7 +28,7 @@ const editPostHandler = async (event) => {
 const deletePostHandler = async (event) => {
 
     event.preventDefault();
-    console.log('deletePostHandler triggered')
+    //console.log('deletePostHandler triggered')
     const postId = $(".editpost-form").attr('id');
 
     const response = await fetch(`/api/posts/${postId}/delete`, {

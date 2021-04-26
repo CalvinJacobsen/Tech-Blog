@@ -58,7 +58,7 @@ router.get('/homepage/post/:id', async (req, res) => {
             });
 
             const allComments = commentData.map((comment) => comment.get({ plain: true }));
-            console.log(allComments);
+            
             const post = postData.get({ plain: true });
 
             res.render('commentsection', {
