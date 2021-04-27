@@ -33,6 +33,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+app.get('/', (req, res) => {
+  // Integrates the body of "home.hbs" inside the defaultLayout "main.hbs"
+  res.render('homepage');
+});
+
 sequelize.sync({ force: false }).then(() => {
   app.listen(process.env.PORT || 3001, () => console.log('Now listening on PORT ' + PORT));
 });
