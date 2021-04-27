@@ -9,6 +9,7 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({});
 
@@ -33,11 +34,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-app.get('/', (req, res) => {
-  // Integrates the body of "home.hbs" inside the defaultLayout "main.hbs"
-  res.render('homepage');
-});
-
 sequelize.sync({ force: false }).then(() => {
-  app.listen(process.env.PORT || 3001, () => console.log('Now listening on PORT ' + PORT));
+  app.listen(PORT, () => console.log('Now listening on PORT ' + PORT));
 });
